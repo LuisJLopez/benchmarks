@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import polars as pl
 
-# Generate synthetic data
+# Generate synthetic / artificial data
 num_rows = 100_000_000
 df = pd.DataFrame(
     {"id": np.arange(num_rows), "value": np.random.randint(0, 1000, size=num_rows)}
@@ -41,8 +41,10 @@ print(f"Polars filtering time: {end_polars - start_polars:.2f} seconds")
 # DuckDB: Fast due to predicate pushdown and multi-threading.
 # Polars: Very fast due to Rust backend and parallel execution.
 
-
 # Results looks like this:
 # Pandas filtering time: 2.33 seconds
 # DuckDB filtering time: 0.23 seconds
 # Polars filtering time: 0.61 seconds
+
+# Pandas will load the entire file into memory before filtering.
+# DuckDB will apply predicate pushdown, reading only relevant parts of the file, making it significantly faster and more memory-efficient.
