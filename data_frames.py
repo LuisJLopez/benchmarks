@@ -90,15 +90,34 @@ print(f"Polars join time: {time.time() - start:.2f} sec")
 # Polars: Very fast due to Rust backend and parallel execution.
 
 # Results looks like this:
+
+########## Filtering Performance ##########
+
 # Pandas filtering time: 2.55 sec
 # DuckDB filtering time: 0.26 sec
 # Polars filtering time: 0.24 sec
+
+# Filtering performance: DuckDB and Polars are ~10x faster than Pandas. This is thanks to:
+# DuckDB: Predicate pushdown and multi-threaded execution.
+# Polars: Rust-based backend and parallelism.
+
+########## GroupBy Aggregation ##########
+
 # Pandas groupby time: 5.78 sec
 # DuckDB groupby time: 0.14 sec
 # Polars groupby time: 1.85 sec
+
+# DuckDB is exceptionally fast here, likely due to its optimized SQL engine. 
+# Polars also performs well, but Pandas lags due to its single-threaded nature and lack of query optimization.
+
+########## Join Performance ##########
+
 # Pandas join time: 19.91 sec
 # DuckDB join time: 3.33 sec
 # Polars join time: 5.20 sec
+
+# Joins are where Pandas really struggles.
+# DuckDB and Polars are ~6x faster, showing their strength in handling relational operations efficiently.
 
 # Pandas will load the entire file into memory before filtering.
 # DuckDB will apply predicate pushdown, reading only relevant parts of the file, making it significantly faster and more memory-efficient.
