@@ -40,3 +40,9 @@ print(f"Polars filtering time: {end_polars - start_polars:.2f} seconds")
 # Pandas: Slower due to eager loading and single-threaded execution.
 # DuckDB: Fast due to predicate pushdown and multi-threading.
 # Polars: Very fast due to Rust backend and parallel execution.
+
+
+# Results looks like this:
+# Pandas filtering time: 2.33 seconds
+# DuckDB filtering time: 0.23 seconds
+# Polars filtering time: 0.61 seconds
